@@ -1,8 +1,4 @@
 from datetime import date
-
-from sqlalchemy import String, Integer, Boolean, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from mff_app import db
 from mff_app.models import *
 
 

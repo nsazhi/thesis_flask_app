@@ -1,6 +1,3 @@
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column, WriteOnlyMapped, relationship
-from mff_app import db
 from mff_app.models import *
 
 
