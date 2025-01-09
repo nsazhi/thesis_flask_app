@@ -8,3 +8,6 @@ class Category(db.Model):
     name: Mapped[str] = mapped_column(String(50), unique=True)
     slug: Mapped[str] = mapped_column(String(50), unique=True, index=True)
     films: WriteOnlyMapped['Film'] = relationship(back_populates='category')
+
+    def __str__(self):
+        return self.name
