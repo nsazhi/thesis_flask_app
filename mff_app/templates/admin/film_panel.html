@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Панель администратора</h1>
+<hr>
+<div class="row">
+    <div class="col">
+        <h2>Добавление фильма</h2>
+    </div>
+    <div class="col">
+        <a href="{{ url_for('admin.cat_panel') }}"><h4>Добавить категорию</h4></a>
+    </div>
+</div>
+<br>
+<form action="" method="post" novalidate class="form-group">
+    {{ form.hidden_tag() }}
+    {{ form.category_id.label }}
+    <br>
+    {{ form.category_id }}
+    <p>
+        {{ form.title.label }}
+        <br>
+        {{ form.title(size=32) }}
+    </p>
+    <p>
+        {{ form.release.label }}
+        <br>
+        {{ form.release(size=32) }}
+    </p>
+    <p>
+        {{ form.country.label }}
+        <br>
+        {{ form.country(size=32) }}
+    </p>
+    <p>
+        {{ form.genre.label }}
+        <br>
+        {{ form.genre(size=32) }}
+    </p>
+    <p>
+        {{ form.director.label }}
+        <br>
+        {{ form.director(size=32) }}
+    </p>
+    <p>
+        {{ form.actors.label }}
+        <br>
+        {{ form.actors(size=32) }}
+    </p>
+    <p>
+        {{ form.description.label }}
+        <br>
+        {{ form.description }}
+    </p>
+    <p>
+        {{ form.img_url.label }}
+        <br>
+        {{ form.img_url(size=32) }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+{% endblock %}
