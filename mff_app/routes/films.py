@@ -9,6 +9,7 @@ def films():
     Получение всех фильмов или списка фильмов по категории при параметре запроса
     """
     slug = request.args.get('slug')
+    genre = request.args.get('genre')
     categories = get_all_categories()
     if slug:
         for c in categories:
