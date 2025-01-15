@@ -7,7 +7,11 @@ from mff_app.routes import *
 @bp_adm.route('/login', methods=['GET', 'POST'])
 def login():
     """
-    Вход админа
+    **Чертеж GET и POST запросов с префиксом /admin:** Форма входа администратора.
+
+    :return: 'admin.login', если GET-запрос и еще не авторизован
+
+    :return redirect: `admin.cat_panel`, если авторизован
     """
     if current_user.is_authenticated:
         return redirect(url_for('admin.cat_panel'))
@@ -26,13 +30,19 @@ def login():
 @login_required
 def cat_panel():
     """
-    Панель добавления категории (для админа)
+    **Чертеж GET и POST запросов с префиксом /admin:** Создание категории.
+
+    :raise: Ошибка валидации данных в форме
+
+    :return: `admin.cat_panel`
     """
     form = CategoryForm()
     if request.method == 'POST':
         if form.validate_on_submit():
             create_category(form)
             return redirect(url_for('admin.cat_panel'))
+        else:
+            raise HTTPException('Error form validation')
     else:
         form = CategoryForm()
     return render_template('admin/cat_panel.html', form=form)
@@ -42,7 +52,11 @@ def cat_panel():
 @login_required
 def film_panel():
     """
-    Панель добавления фильма (для админа)
+    **Чертеж GET и POST запросов с префиксом /admin:** Создание фильма.
+
+    :raise: Ошибка валидации данных в форме
+
+    :return: 'admin.film_panel'
     """
     form = FilmForm()
     print(form)

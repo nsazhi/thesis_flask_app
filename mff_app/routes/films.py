@@ -6,10 +6,32 @@ from mff_app.routes import *
 @bp_fil.route('/', methods=['GET'])
 def films():
     """
-    Получение всех фильмов или списка фильмов по категории при параметре запроса
+    **Чертеж GET-запроса с префиксом /films:** Список всех фильмов или по категории.
+
+    **Если есть параметр запроса:**
+
+    :param: `slug`
+
+    **Context**
+
+    ``category``
+        Объект category.Category с Category.slug == slug
+
+    ``films``
+        Список объектов `films.Film` с фильтром по Film.category_id.
+
+    :return: Шаблон `films/films_by_category.html`
+
+    **Если нет параметра запроса:**
+
+    **Context**
+
+    ``films``
+        Список объектов `films.Film`.
+
+    :return: Шаблон `films/films.html`,
     """
     slug = request.args.get('slug')
-    genre = request.args.get('genre')
     categories = get_all_categories()
     if slug:
         for c in categories:
@@ -29,7 +51,19 @@ def films():
 @bp_fil.route('/<category_slug>', methods=['GET'])
 def get_films_by_category(category_slug: str):
     """
-    Получение списка фильмов по категории - динамические URL
+    **Чертеж GET-запроса с префиксом /films:** Список фильмов по категории.
+
+    :param: `category_slug`
+
+    **Context**
+
+    ``category``
+        Объект category.Category с Category.slug == category_slug
+
+    ``films``
+        Список объектов `films.Film` с фильтром по Film.category_id.
+
+    :return: Шаблон `films/films_by_category.html`
     """
     categories = get_all_categories()
     for c in categories:
@@ -45,7 +79,11 @@ def get_films_by_category(category_slug: str):
 @login_required
 def create_film(form):
     """
-    Добавление фильма (для админа)
+    **Чертеж POST-запроса с префиксом /films:** Создание фильма.
+
+    :raise: Ошибка создания фильма
+
+    :return redirect: Текущая страница
     """
     print(form)
     try:
@@ -62,5 +100,6 @@ def create_film(form):
                                                )
                            )
         db.session.commit()
+        return redirect('#')
     except:
-        raise HTTPException('Фильм уже существует')
+        raise HTTPException('Что-то пошло не так')

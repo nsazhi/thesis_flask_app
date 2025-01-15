@@ -3,6 +3,9 @@ from mff_app.models import *
 
 
 class Film(db.Model):
+    """
+    Создает в базе данных объект модели Фильм, связанный с объектом category.Category.
+    """
     __tablename__ = "films"
     __table_args__ = {"keep_existing": True}
     id: Mapped[int] = mapped_column(primary_key=True, index=True)

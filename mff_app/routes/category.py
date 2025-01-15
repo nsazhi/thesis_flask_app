@@ -5,7 +5,9 @@ from mff_app.routes import *
 @app.route('/all', methods=['GET'])
 def get_all_categories():
     """
-    Получение всех категорий из БД
+    **Чертеж GET-запроса с префиксом /category:** Список категорий.
+
+    :return: Список всех категорий в базе данных
     """
     categories = db.session.scalars(select(Category)).all()
     return categories
@@ -15,11 +17,16 @@ def get_all_categories():
 @login_required
 def create_category(form):
     """
-    Добавление категории (для админа)
+    **Чертеж POST-запроса с префиксом /category:** Создание категории.
+
+    :raise: Ошибка создания категории
+
+    :return redirect: Текущая страница
     """
     try:
         db.session.execute(insert(Category).values(name=form.name.data,
                                                    slug=slugify(form.name.data)))
         db.session.commit()
+        return redirect('#')
     except:
         raise HTTPException('Категория уже существует')

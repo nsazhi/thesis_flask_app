@@ -9,10 +9,9 @@ from mff_app import app, db
 from mff_app.models import *
 from mff_app.forms import *
 
-
 from slugify import slugify
 
-# Маршрутизаторы
+# Чертежи
 bp_adm = Blueprint('admin', __name__)  # Вход админа - "/admin"
 bp_cat = Blueprint('category', __name__)  # Категория - "/category"
 bp_fil = Blueprint('films', __name__)  # Фильмы - "/films"
