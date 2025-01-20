@@ -145,6 +145,10 @@ films/films_by_category.html — страница каталога фильмо�
 
 `cd Blog-My-Favorite-Films-Flask`
 
+Установите модули из файла requirements.txt:
+
+`pip install -r requirements.txt`
+
 Добавьте файл **.flaskenv**, который необходим для запуска в терминале команд через "flask" (например, `flask run`):
 
 `cd . > .flaskenv`
